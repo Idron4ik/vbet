@@ -14,7 +14,6 @@
     </ul>
 
     <textarea v-model="newMatches"></textarea>
-    {{newMatches}}
     <button
       class="btn"
       @click="saveData"
