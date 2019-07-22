@@ -28,7 +28,7 @@
     getParseNamePlayer();
 
 
-   
+
     ;(function(){
       let getParseIdLeague = function () {
       let elems = document.querySelectorAll('#live-table .event__match');
@@ -37,7 +37,7 @@
         return item.id;
       });
       return result;
-    }
+    };
     console.log(getParseIdLeague());
 
     })();
@@ -100,18 +100,32 @@
       });
 
     }
-    
-			
+
+
 
 
     (function () {
     	function createBtn() {
-	      div = document.createElement("div");
-	      let btn = `<button id="btn" style="position: fixed;z-index: 10000;left: 0;top: 0;background: red;height: 100px;line-height: 100px;tex-aligin: center">Жми СЮДА!!!</button>`;
+	      let wrapper = document.createElement("div");
 
-	      div.innerHTML = btn;
+          wrapper.classList = 'vbet';
+          wrapper.style=`
+            position: fixed;
+            left: 5px;
+            top: 5px;
+            bottom: 5px;
+            right: 5px;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid black;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 10000;
+          `;
+	      let btn = `<button id="vbtn" style="padding: 20px 35px">start</button>`;
 
-	      document.body.appendChild(div);
+          wrapper.innerHTML = btn;
+
+	      document.body.appendChild(wrapper);
 	    }
 
       async function loaded(context, selector) {
@@ -162,11 +176,11 @@
       }
 
       createBtn();
-      
+
 
       let response = [];
 
-      document.querySelector("#btn").onclick = async function () {
+      document.querySelector("#vbtn").onclick = async function () {
 
         // let name = ['d8mJoznb', 'hKGljw5q', 'WbkhQLAt', 'lAt57F3h', 'lE0uzr4m', '80IUh0yH','hx84cBt7','j1gt2XMi','ljYc1DGE'];
         let name = ['0QNEE3kC', 'hKGljw5q'];

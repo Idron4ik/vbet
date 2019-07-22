@@ -1,10 +1,13 @@
 <template>
   <div class="data-base">
     <h2>database</h2>
+    <hr>
+    {{testMatch}}
+    <hr>
     <ul>
-      <li 
-        v-for="match in matches"
-        :key="match.id"
+      <li
+        v-for="(match, index) in matches"
+        :key="match.id+index"
         >
           {{match}}
         </li>
@@ -12,7 +15,7 @@
 
     <textarea v-model="newMatches"></textarea>
     {{newMatches}}
-    <button 
+    <button
       class="btn"
       @click="saveData"
     >
@@ -29,25 +32,25 @@
       return {
         matches: [],
         newMatches: null,
+        testMatch: {
+          id: 123,
+          idMatch: '0QNEE3kC',
+          idTournament: 'cx,mv12a',
+          data: '21.06.1998',
+          cover: 'grass'
+        }
       }
     },
 
     methods:{
       saveData(){
-        //   this.$db.collection("matches").add({
-        //     title: "po[po",
-        //     id: "3",
-        // })
-        // .then(function(docRef) {
-        //     console.log("Document written with ID: ", docRef.id);
-        // })
-        // .catch(function(error) {
-        //     console.error("Error adding document: ", error);
-        // });
-        this.$db.collection("matches").doc("LA").set({
-            name: "Los Angeles sss",
-            state: "CAss",
-            country: "USA"
+        let response = JSON.parse(this.newMatches);
+
+        let {idMatch, ...rest} = response;
+        console.log(rest);
+        console.log(idMatch);
+        this.$db.collection("matches").doc(`${idMatch}`).set({
+           ...rest
         })
         .then(function() {
             console.log("Document successfully written!");
@@ -56,12 +59,14 @@
             console.error("Error writing document: ", error);
         });
 
+        this.newMatches = '';
       }
     },
 
     mounted(){
       this.$db.collection("matches").get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
+            console.log(doc);
             this.matches.push(doc.data());
           });
       });
