@@ -9,8 +9,6 @@ let getParseIdLeague = function () {
 };
 console.log(getParseIdLeague());
 
-
-
 function getParseIdPlayer() {
   let elem = document.querySelector('.team-header .toggleMyTeam');
 
@@ -23,13 +21,12 @@ function getParseNamePlayer() {
 
   return elem.href.split('/')[4];
 }
-
 getParseNamePlayer();
 
+(function () {
 
 
-
-
+})();
 
 function getParseDate(selector) {
 
@@ -37,18 +34,7 @@ function getParseDate(selector) {
   let [day, month, year, h = 0, m = 0] = datetime;
   return new Date(day, month, year, h, m);
 }
-
-
 getParseDate();
-
-function getParseMatchName() {
-  return document.querySelector('.headerStrip .fleft').innerText;
-}
-
-getParseMatchName();
-
-
-
 
 function getParseTotal() {
 
@@ -59,10 +45,7 @@ function getParseTotal() {
   });
 
 }
-
-
 getParseTotal();
-
 
 (function () {
   function getDate(datetime) {
@@ -74,7 +57,7 @@ getParseTotal();
 
     return date;
   }
-  
+
   let getParseIdGame = function () {
     let elems = document.querySelectorAll('#live-table .event__match');
 
@@ -134,6 +117,49 @@ getParseTotal();
       }, 1000);
     });
   }
+  
+  function getParseDate(selector) {
+
+    let datetime = selector.split(/[. :]/g);
+    let [day, month, year, h = 0, m = 0] = datetime;
+    let date = new Date(year, month, day, h, m);
+    console.log(date);
+    console.log(date.getTime());
+    return date;
+  }
+
+  function getMatchesData(context) {
+    let homeBox = context.document.querySelector("#flashscore .team-primary-content .home-box");
+    let homePlayer = homeBox.innerText.split('.');
+    let homePlayerId = homeBox.querySelector(".toggleMyTeam").classList[1].split('_')[1];
+
+    let awayBox = context.document.querySelector("#flashscore .team-primary-content .away-box");
+    let awayPlayer = awayBox.innerText.split('.');
+    let awayPlayerId = awayBox.querySelector(".toggleMyTeam").classList[1].split('_')[1];
+
+    let [name1, atp1] = homePlayer;
+    let [name2, atp2] = awayPlayer;
+
+    let header = context.document.querySelector('.headerStrip .fleft').innerText.split(',');
+    let cover = header[1].split('-')[0];
+    
+    let date = getParseDate(context.document.querySelector('#utime').innerText);
+    return {
+      homePlayer: {
+        name: name1,
+        atp: atp1.split(" ")[1],
+        id: homePlayerId
+      },
+      awayPlayer: {
+        name: name2,
+        atp: atp2.split(" ")[1],
+        id: awayPlayerId
+      },
+      city: header[0],
+      cover,
+      date
+    };
+  }
 
   function getShortStatic(context) {
     let elem = context.document.querySelectorAll('#summary-content #parts tbody tr');
@@ -151,41 +177,48 @@ getParseTotal();
     await loaded(context, '#tab-statistics-0-statistic .statRow .statTextGroup');
     let row = context.document.querySelectorAll('#tab-statistics-0-statistic .statRow .statTextGroup');
 
-
     let statistics = [...row].map((val) => {
       let arrValue = val.querySelectorAll('.statText');
       let res = [arrValue[0].innerText, arrValue[1].innerText, arrValue[2].innerText]
       return res;
     });
-    console.log(statistics);
+
     context.window.location.href = context.window.location.href.replace('#match-statistics;0', '#match-summary');
+    let { homePlayer, awayPlayer, city, cover, date } = getMatchesData(context);
+
+
     await loaded(context, '#summary-content #parts tbody tr');
 
     let courseMatch = getShortStatic(context);
-    return new Promise(resolve => resolve({ statistics, courseMatch  }));
-
-    // return data;
+    return new Promise(resolve => resolve({ 
+      statistics, 
+      courseMatch, 
+      homePlayer, 
+      awayPlayer,
+      city, 
+      cover, 
+      date 
+    }));
   }
 
 
 
-  let response = [];
+  let response = {};
 
   document.querySelector("#vbtn").onclick = async function () {
 
-    let matches = document.querySelector("#matches").value;
-    console.log(matches);
+    // let matches = document.querySelector("#matches").value;
+    // console.log(matches);
 
     let name = [
-      "fyXBxdlb",
-      "WQR97Wkf",
-      "63QkVFVe",
+      "8fPZCIB5",
     ];
+    let context = [];
 
     for (let i = 0; i < name.length; i++) {
-      name[i] = window.open(`https://www.myscore.com.ua/match/${name[i]}/#match-statistics;0`, name[i]);
+      context[i] = window.open(`https://www.myscore.com.ua/match/${name[i]}/#match-statistics;0`, name[i]);
 
-      response.push(await getParseStatistics(name[i]));
+      response[name[i]] = await getParseStatistics(context[i]);
     }
 
     console.log(response);
