@@ -201,8 +201,6 @@ getParseTotal();
     }));
   }
 
-
-
   let response = {};
 
   document.querySelector("#vbtn").onclick = async function () {
@@ -222,6 +220,5 @@ getParseTotal();
     }
 
     console.log(response);
-
   };
 })();

@@ -7,7 +7,7 @@
     <ul>
       <li
         v-for="(match, index) in matches"
-        :key="match.id+index"
+        :key="index"
         >
           {{match}}
         </li>
@@ -32,11 +32,226 @@
         matches: [],
         newMatches: null,
         testMatch: {
-          id: 123,
-          idMatch: '0QNEE3kC',
-          idTournament: 'cx,mv12a',
-          data: '21.06.1998',
-          cover: 'grass'
+          "8fPZCIB5": {
+            "statistics": [
+              [
+                "9",
+                "Подачи навылет",
+                "13"
+              ],
+              [
+                "4",
+                "Двойные ошибки",
+                "3"
+              ],
+              [
+                "64%",
+                "% первой подачи",
+                "54%"
+              ],
+              [
+                "83% (35/42)",
+                "Очки выигр. на п.п.",
+                "82% (32/39)"
+              ],
+              [
+                "79% (19/24)",
+                "Очки выигр. на в.п.",
+                "61% (20/33)"
+              ],
+              [
+                "0% (0/0)",
+                "Спасенные брейкпоинты",
+                "50% (1/2)"
+              ],
+              [
+                "18% (7/39)",
+                "Очки выигр. с п.п.",
+                "17% (7/42)"
+              ],
+              [
+                "30% (10/33)",
+                "Очки выигр. со в.п.",
+                "4% (1/24)"
+              ],
+              [
+                "50% (1/2)",
+                "Реализованные брейкпойнты",
+                "0% (0/0)"
+              ],
+              [
+                "6",
+                "Очки выигр. подряд",
+                "5"
+              ],
+              [
+                "82% (54/66)",
+                "Выиграно на подаче",
+                "72% (52/72)"
+              ],
+              [
+                "28% (20/72)",
+                "Выиграно на приеме",
+                "18% (12/66)"
+              ],
+              [
+                "54% (74/138)",
+                "Всего выигранных очков",
+                "46% (64/138)"
+              ],
+              [
+                "3",
+                "Геймы выигр. подряд",
+                "1"
+              ],
+              [
+                "100% (12/12)",
+                "Геймы выигр. на с.п.",
+                "92% (11/12)"
+              ],
+              [
+                "8% (1/12)",
+                "Геймы выигр. на приеме",
+                "0% (0/12)"
+              ],
+              [
+                "54% (13/24)",
+                "Всего выигранных геймов",
+                "46% (11/24)"
+              ]
+            ],
+            "courseMatch": [
+              [
+                " \tКлан Б. (Сша)\t2\t77\t7\t \t \t \t "
+              ],
+              [
+                " \tКопил M. (Рум)\t0\t63\t5\t \t \t \t "
+              ]
+            ],
+            "homePlayer": {
+              "name": "Клан Б",
+              "atp": "94",
+              "id": "tpwrq93s"
+            },
+            "awayPlayer": {
+              "name": "Копил M",
+              "atp": "84",
+              "id": "zgkCPwGs"
+            },
+            "city": "ATP - ОДИНОЧНЫЙ РАЗРЯД: Атланта (США)",
+            "cover": " хард ",
+            "date": "2019-08-22T21:00:00.000Z"
+          },
+          "8fPZCIB2": {
+            "statistics": [
+              [
+                "91",
+                "Подачи навылет",
+                "13"
+              ],
+              [
+                "4",
+                "Двойные ошибки",
+                "3"
+              ],
+              [
+                "64%",
+                "% первой подачи",
+                "54%"
+              ],
+              [
+                "83% (35/42)",
+                "Очки выигр. на п.п.",
+                "82% (32/39)"
+              ],
+              [
+                "79% (19/24)",
+                "Очки выигр. на в.п.",
+                "61% (20/33)"
+              ],
+              [
+                "0% (0/0)",
+                "Спасенные брейкпоинты",
+                "50% (1/2)"
+              ],
+              [
+                "18% (7/39)",
+                "Очки выигр. с п.п.",
+                "17% (7/42)"
+              ],
+              [
+                "30% (10/33)",
+                "Очки выигр. со в.п.",
+                "4% (1/24)"
+              ],
+              [
+                "50% (1/2)",
+                "Реализованные брейкпойнты",
+                "0% (0/0)"
+              ],
+              [
+                "6",
+                "Очки выигр. подряд",
+                "5"
+              ],
+              [
+                "82% (54/66)",
+                "Выиграно на подаче",
+                "72% (52/72)"
+              ],
+              [
+                "28% (20/72)",
+                "Выиграно на приеме",
+                "18% (12/66)"
+              ],
+              [
+                "54% (74/138)",
+                "Всего выигранных очков",
+                "46% (64/138)"
+              ],
+              [
+                "3",
+                "Геймы выигр. подряд",
+                "1"
+              ],
+              [
+                "100% (12/12)",
+                "Геймы выигр. на с.п.",
+                "92% (11/12)"
+              ],
+              [
+                "8% (1/12)",
+                "Геймы выигр. на приеме",
+                "0% (0/12)"
+              ],
+              [
+                "54% (13/24)",
+                "Всего выигранных геймов",
+                "46% (11/24)"
+              ]
+            ],
+            "courseMatch": [
+              [
+                " \tКлан Б. (Сша)\t2\t77\t7\t \t \t \t "
+              ],
+              [
+                " \tКопил M. (Рум)\t0\t63\t5\t \t \t \t "
+              ]
+            ],
+            "homePlayer": {
+              "name": "Клан Б 1",
+              "atp": "94",
+              "id": "tpwrq93s"
+            },
+            "awayPlayer": {
+              "name": "Копил M1",
+              "atp": "84",
+              "id": "zgkCPwGs"
+            },
+            "city": "ATP - ОДИНОЧНЫЙ РАЗРЯД: Атланта (США)",
+            "cover": " хард ",
+            "date": "2019-08-22T21:00:00.000Z"
+          }
         }
       }
     },
@@ -44,19 +259,29 @@
     methods:{
       saveData(){
         let response = JSON.parse(this.newMatches);
+        Object.keys(response).forEach((idMatch)=>{
+        console.log(Object.assign({}, response[idMatch].statistics));
 
-        let {idMatch, ...rest} = response;
-        console.log(rest);
-        console.log(idMatch);
-        this.$db.collection("matches").doc(`${idMatch}`).set({
-           ...rest
-        })
-        .then(function() {
-            console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
+          this.$db.collection("matches").doc(`${idMatch}`).set({
+            awayPlayer: response[idMatch].awayPlayer,
+            homePlayer: response[idMatch].homePlayer,
+            // idTournament: response[idMatch].idTournament,
+            date: response[idMatch].date,
+            statistics: Object.assign({}, response[idMatch].statistics),
+            courseMatch: Object.assign({}, response[idMatch].courseMatch),
+            cover: response[idMatch].cover,
+            city: response[idMatch].city,
+          })
+          .then(function() {
+              console.log("Document successfully written!");
+          })
+          .catch(function(error) {
+              console.error("Error writing document: ", error);
+          });
+            // this.$db.collection("matches").doc(`${idMatch}`).set(response[idMatch]);
         });
+         
+        
 
         this.newMatches = '';
       }
