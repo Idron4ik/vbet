@@ -1,25 +1,44 @@
 <template>
   <div class="data-base">
-    <h2>database</h2>
-    <hr>
-    {{testMatch}}
-    <hr>
-    <ul>
-      <li
-        v-for="(match, index) in matches"
-        :key="index"
-        >
-          {{match}}
-        </li>
-    </ul>
-
-    <textarea v-model="newMatches"></textarea>
-    <button
-      class="btn"
-      @click="saveData"
+    <v-tabs
+        v-model="tab"
+        background-color="transparent"
     >
-      save data
-    </button>
+      <v-tab
+              v-for="item in items"
+              :key="item"
+      >
+        {{ item }}
+      </v-tab>
+    </v-tabs>
+    <v-tabs-items v-model="tab">
+      <v-tab-item>
+          <v-text-field
+                  label="New ids"
+                  solo
+                  v-model="newIds"
+          ></v-text-field>
+
+          <v-btn color="primary" @click="checkIds">Check ID`s</v-btn>
+
+          <p v-if="checkedIds.length > 0">{{checkedIds}}</p>
+      </v-tab-item>
+
+
+      <v-tab-item>
+        <v-textarea
+            v-model="newMatches"
+            solo
+            label="Matches data"
+        ></v-textarea>
+
+        <v-btn color="primary" @click="saveData">save data</v-btn>
+
+      </v-tab-item>
+
+    </v-tabs-items>
+
+
   </div>
 </template>
 
@@ -29,6 +48,9 @@
 
     data(){
       return {
+        newIds: null,
+        matchesId: [],
+        checkedIds: [],
         matches: [],
         newMatches: null,
         testMatch: {
@@ -252,7 +274,9 @@
             "cover": " хард ",
             "date": "2019-08-22T21:00:00.000Z"
           }
-        }
+        },
+        tab: null,
+        items: ['Check new Id', 'Add Data'],
       }
     },
 
@@ -280,24 +304,35 @@
           });
             // this.$db.collection("matches").doc(`${idMatch}`).set(response[idMatch]);
         });
-         
-        
+
+
 
         this.newMatches = '';
+      },
+
+      checkIds(){
+        let newIds = JSON.parse(this.newIds);
+
+        this.$db.collection("matches").get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            this.matchesId.push(doc.id);
+          });
+
+          newIds = newIds.filter(( el ) =>{
+            return !this.matchesId.includes( el );
+          } );
+          this.checkedIds = newIds;
+        });
+
+
       }
     },
-
-    mounted(){
-      this.$db.collection("matches").get().then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            console.log(doc);
-            this.matches.push(doc.data());
-          });
-      });
-    }
   }
 </script>
 
 <style lang="scss" scoped>
-
+  .theme--light.v-tabs-items{
+    background-color: transparent;
+    padding: 10px 0;
+  }
 </style>
