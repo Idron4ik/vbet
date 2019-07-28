@@ -1,3 +1,4 @@
+import { reject } from "q";
 
 let getParseIdLeague = function () {
   let elems = document.querySelectorAll('#live-table .event__match');
@@ -113,7 +114,7 @@ getParseTotal();
         if (row.length > 0) {
           clearInterval(timer);
           return resolve();
-        }
+        } else reject()
       }, 1000);
     });
   }
@@ -175,6 +176,7 @@ getParseTotal();
 
   async function getParseStatistics(context) {
     await loaded(context, '#tab-statistics-0-statistic .statRow .statTextGroup');
+    console.log(loaded(context, '#tab-statistics-0-statistic .statRow .statTextGroup'));
     let row = context.document.querySelectorAll('#tab-statistics-0-statistic .statRow .statTextGroup');
 
     let statistics = [...row].map((val) => {
@@ -205,12 +207,16 @@ getParseTotal();
 
   document.querySelector("#vbtn").onclick = async function () {
 
-    // let matches = document.querySelector("#matches").value;
-    // console.log(matches);
+    let matches = JSON.parse(document.querySelector("#matches").value);
 
-    let name = [
-      "8fPZCIB5",
-    ];
+    let name = matches.filter((item, index)=>{
+      if(index < 10) return true;
+    });
+
+    // let name =  [ 
+    // "bPm9mveJ"
+    // ];
+    console.log(name);
     let context = [];
 
     for (let i = 0; i < name.length; i++) {
