@@ -118,14 +118,12 @@ getParseTotal();
       }, 1000);
     });
   }
-  
+
   function getParseDate(selector) {
 
     let datetime = selector.split(/[. :]/g);
     let [day, month, year, h = 0, m = 0] = datetime;
     let date = new Date(year, month, day, h, m);
-    console.log(date);
-    console.log(date.getTime());
     return date;
   }
 
@@ -143,7 +141,7 @@ getParseTotal();
 
     let header = context.document.querySelector('.headerStrip .fleft').innerText.split(',');
     let cover = header[1].split('-')[0];
-    
+
     let date = getParseDate(context.document.querySelector('#utime').innerText);
     return {
       homePlayer: {
@@ -174,9 +172,9 @@ getParseTotal();
     });
   }
 
-  async function getParseStatistics(context) {
+  async function getParseMatch(context) {
     await loaded(context, '#tab-statistics-0-statistic .statRow .statTextGroup');
-    console.log(loaded(context, '#tab-statistics-0-statistic .statRow .statTextGroup'));
+
     let row = context.document.querySelectorAll('#tab-statistics-0-statistic .statRow .statTextGroup');
 
     let statistics = [...row].map((val) => {
@@ -192,14 +190,14 @@ getParseTotal();
     await loaded(context, '#summary-content #parts tbody tr');
 
     let courseMatch = getShortStatic(context);
-    return new Promise(resolve => resolve({ 
-      statistics, 
-      courseMatch, 
-      homePlayer, 
+    return new Promise(resolve => resolve({
+      statistics,
+      courseMatch,
+      homePlayer,
       awayPlayer,
-      city, 
-      cover, 
-      date 
+      city,
+      cover,
+      date
     }));
   }
 
@@ -213,16 +211,17 @@ getParseTotal();
       if(index < 10) return true;
     });
 
-    // let name =  [ 
+    // let name =  [
     // "bPm9mveJ"
     // ];
+
     console.log(name);
     let context = [];
 
     for (let i = 0; i < name.length; i++) {
       context[i] = window.open(`https://www.myscore.com.ua/match/${name[i]}/#match-statistics;0`, name[i]);
 
-      response[name[i]] = await getParseStatistics(context[i]);
+      response[name[i]] = await getParseMatch(context[i]);
     }
 
     console.log(response);
