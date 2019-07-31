@@ -1,5 +1,3 @@
-import { reject } from "q";
-
 let getParseIdLeague = function () {
   let elems = document.querySelectorAll('#live-table .event__match');
 
@@ -109,13 +107,29 @@ getParseTotal();
 
   async function loaded(context, selector) {
     return await new Promise(resolve => {
-      let timer = setInterval(() => {
-        let row = context.document.querySelectorAll(selector);
-        if (row.length > 0) {
-          clearInterval(timer);
-          return resolve();
-        } else reject()
+
+      let loadedTabs = setInterval(() => {
+        let loadedTab = context.document.querySelectorAll('#detail-submenu-bookmark .ifmenu li');
+
+        if (loadedTab.length > 0) {
+          clearInterval(loadedTabs);
+
+          if(loadedTab.length === 2){
+            return resolve(true);
+          }
+
+          let loadedContent = setInterval(() => {
+            let loaded = context.document.querySelectorAll(selector);
+            if (loaded.length > 0) {
+              clearInterval(loadedContent);
+              return resolve(false);
+            }
+          }, 1000);
+
+        }
       }, 1000);
+
+
     });
   }
 
@@ -173,7 +187,11 @@ getParseTotal();
   }
 
   async function getParseMatch(context) {
-    await loaded(context, '#tab-statistics-0-statistic .statRow .statTextGroup');
+    let stopParseMatch = await loaded(context, '#tab-statistics-0-statistic .statRow .statTextGroup');
+
+    if(stopParseMatch){
+      return new Promise(resolve => resolve() );
+    }
 
     let row = context.document.querySelectorAll('#tab-statistics-0-statistic .statRow .statTextGroup');
 
@@ -207,15 +225,17 @@ getParseTotal();
 
     let matches = JSON.parse(document.querySelector("#matches").value);
 
-    let name = matches.filter((item, index)=>{
-      if(index < 10) return true;
-    });
+    let name = matches;
+    console.log(name);
+    // let name = matches.filter((item, index)=>{
+    //   if(index < 10) return true;
+    // });
 
     // let name =  [
-    // "bPm9mveJ"
+    //   "bPm9mveJ",
+    //   "fyXBxdlb"
     // ];
 
-    console.log(name);
     let context = [];
 
     for (let i = 0; i < name.length; i++) {

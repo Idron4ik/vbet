@@ -14,7 +14,12 @@ export default new Router({
     {
       path: '/database',
       name: 'Database',
-      component: () => import(/* webpackChunkName: "about" */ './views/Database.vue')
+      component: () => import(/* webpackChunkName: "database" */ './views/Database.vue')
+    },
+    {
+      path: '/getdata',
+      name: 'getdata',
+      component: () => import(/* webpackChunkName: "getdata" */ './views/GetData.vue')
     }
   ]
 })

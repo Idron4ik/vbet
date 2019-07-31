@@ -37,6 +37,10 @@
           {
             name: 'Database',
             url: '/database'
+          },
+          {
+            name: 'getdata',
+            url: '/getdata'
           }
         ]
       }
