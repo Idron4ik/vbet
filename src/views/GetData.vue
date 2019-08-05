@@ -12,9 +12,20 @@
       >
         <div
           class="matches__item"
-          v-for="match in matches"
+          v-for="(match, index) in matches"
+          :key="index"
         >
-          {{match}}
+        <div class="match__away-player">
+          {{match.awayPlayer}}
+        </div>
+        <div class="match__home-player">
+          {{match.homePlayer}}
+        </div>
+        <time class="match__data">{{match.date}}</time>
+        <div class="match__statistics">{{match.statistics}}</div>
+        <div class="match__tournament">{{match.idTournament}}</div>
+        <div class="match__cover">{{match.cover}}</div>
+        <div class="match__city">{{match.city}}</div>
           <!--{{match.homePlayer.name}}-->
         </div>
       </div>
